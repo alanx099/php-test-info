@@ -1,4 +1,3 @@
-
 FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y
@@ -13,5 +12,4 @@ RUN ln -s /etc/apache2/sites-available/slc.conf /etc/apache2/sites-enabled/slc.c
 CMD ["apachectl","-D","FOREGROUND"]
 RUN a2enmod rewrite
 RUN a2enmod php7.2
-EXPOSE 80
-EXPOSE 443
+
