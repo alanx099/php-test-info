@@ -13,5 +13,5 @@ RUN a2enmod rewrite
 RUN a2enmod php7.2
 RUN a2enmod lbmethod_byrequests
 CMD ["apachectl","-D","FOREGROUND"]
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8080
+EXPOSE 8443
