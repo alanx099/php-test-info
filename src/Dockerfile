@@ -1,33 +1,18 @@
-FROM ubuntu 
-RUN apt update 
+FROM ubuntu:latest
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -y
+RUN apt-get upgrade -y
 RUN apt-get install -y apache2 
+RUN apt-get install -y software-properties-common 
+RUN add-apt-repository -y ppa:ondrej/php
+RUN apt-get update -y
+RUN apt-get install -y php7.2 libapache2-mod-php7.2 php7.2-common php7.2-curl php7.2-mbstring php7.2-xmlrpc php7.2-mysql php7.2-gd php7.2-xml php7.2-intl php7.2-ldap php7.2-imagick php7.2-json php7.2-cli
+WORKDIR /var/www/html
 COPY ./index.php /var/www/html/
-ENV APACHE_RUN_USER                         www-data
-ENV APACHE_RUN_GROUP                        www-data
-ENV APACHE_LOG_DIR                          /var/log/apache2
-ENV APACHE_PID_FILE                         /var/run/apache2.pid
-ENV APACHE_RUN_DIR                          /var/run/apache2
-ENV APACHE_LOCK_DIR                         /var/lock/apache2
-ENV APACHE_SERVER_ADMIN                     admin@localhost
-ENV APACHE_SERVER_NAME                      localhost
-ENV APACHE_SERVER_ALIAS                     docker.localhost
-ENV APACHE_DOCUMENT_ROOT                    /var/www/html
-
-ENV APACHE_WORKER_START_SERVERS             3
-ENV APACHE_WORKER_MIN_SPARE_THREADS         2
-ENV APACHE_WORKER_MAX_SPARE_THREADS         10
-ENV APACHE_WORKER_THREAD_LIMIT              64
-ENV APACHE_WORKER_THREADS_PER_CHILD         25
-ENV APACHE_WORKER_MAX_REQUEST_WORKERS       4
-ENV APACHE_WORKER_MAX_CONNECTIONS_PER_CHILD 0
-
-ENV DEBIAN_FRONTEND noninteractive
-
-# Update the package repository
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y wget curl locales apache2 tzdata m4 && \
-    apt-get clean
-
+COPY ./ports.conf /etc/apache2/ports.conf
+RUN a2enmod rewrite
+RUN a2enmod php7.2
+RUN a2enmod lbmethod_byrequests
+CMD ["apachectl","-D","FOREGROUND"]
 EXPOSE 8080
-CMD ["apachectl", "-D", "FOREGROUND"]
+EXPOSE 8443
