@@ -1,5 +1,9 @@
 FROM ubuntu/apache2:2.4-22.04_beta
-ENV DEBIAN_FRONTEND=noninteractive
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log/apache2
+ENV APACHE_LOCK_DIR /var/lock/apache2
+ENV APACHE_PID_FILE /var/run/apache2.pid
 RUN apt-get update -y
 RUN apt-get upgrade -y
 RUN apt-get install -y software-properties-common 
@@ -13,6 +17,5 @@ COPY tmp/build/inputs/ports.conf /etc/apache2/ports.conf
 RUN a2enmod rewrite
 RUN a2enmod php7.2
 RUN a2enmod lbmethod_byrequests
-CMD ["/usr/sbin/apache2ctl","-D","FOREGROUND"]
 EXPOSE 8080
 EXPOSE 8443
