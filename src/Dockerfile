@@ -13,7 +13,7 @@ ENV APACHE_SERVER_NAME                      localhost
 ENV APACHE_SERVER_ALIAS                     docker.localhost
 ENV APACHE_DOCUMENT_ROOT                    /var/www/html
 
-ENV APACHE_WORKER_START_SERVERS             2
+ENV APACHE_WORKER_START_SERVERS             3
 ENV APACHE_WORKER_MIN_SPARE_THREADS         2
 ENV APACHE_WORKER_MAX_SPARE_THREADS         10
 ENV APACHE_WORKER_THREAD_LIMIT              64
