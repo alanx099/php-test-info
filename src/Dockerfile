@@ -42,7 +42,6 @@ RUN locale-gen $LANGUAGE && \
     echo "$TIMEZONE" > /etc/timezone && \
     dpkg-reconfigure -f noninteractive tzdata
 
-ADD rootfs /
 
 # Activate modules & configurations
 RUN a2enconf server-name && \
