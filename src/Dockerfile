@@ -21,8 +21,6 @@ ENV APACHE_WORKER_THREADS_PER_CHILD         25
 ENV APACHE_WORKER_MAX_REQUEST_WORKERS       4
 ENV APACHE_WORKER_MAX_CONNECTIONS_PER_CHILD 0
 
-# System 
-ENV TIMEZONE Etc/UTC
 ENV DEBIAN_FRONTEND noninteractive
 
 # Update the package repository
@@ -31,35 +29,5 @@ RUN apt-get update && \
     apt-get install -y wget curl locales apache2 tzdata m4 && \
     apt-get clean
 
-# Locale specific
-ENV LANGUAGE en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LC_ALL en_US.UTF-8
-
-# Configure timezone and locale
-RUN locale-gen $LANGUAGE && \
-    dpkg-reconfigure locales && \
-    echo "$TIMEZONE" > /etc/timezone && \
-    dpkg-reconfigure -f noninteractive tzdata
-
-
-# Activate modules & configurations
-RUN a2enconf server-name && \
-    a2enmod rewrite && \
-    a2enmod cgi && \
-    a2enmod expires && \
-    a2enmod headers && \
-    a2enmod remoteip && \
-    a2enmod status && \
-    a2dismod mpm_prefork && \
-    a2dismod mpm_event && \
-    a2enmod mpm_worker && \
-    a2disconf serve-cgi-bin && \
-    a2enconf db-env && \
-    a2enconf html && \
-    a2enconf logging && \
-    a2enconf cgi-bin && \
-    a2enconf error-log && \
-    a2enconf security
 EXPOSE 8080
 CMD ["apachectl", "-D", "FOREGROUND"]
