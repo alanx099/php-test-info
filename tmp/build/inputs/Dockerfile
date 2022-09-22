@@ -13,6 +13,6 @@ COPY tmp/build/inputs/ports.conf /etc/apache2/ports.conf
 RUN a2enmod rewrite
 RUN a2enmod php7.2
 RUN a2enmod lbmethod_byrequests
-CMD ["apachectl","-D","FOREGROUND"]
+CMD ["/usr/sbin/apache2ctl","-D","FOREGROUND"]
 EXPOSE 8080
 EXPOSE 8443
