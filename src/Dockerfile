@@ -1,4 +1,4 @@
-FROM php:7.2-apache 
+FROM php:7.2-alpine 
 LABEL summary="Opis" \
       description="Opis" \
       io.k8s.description="${DESCRIPTION}" \
