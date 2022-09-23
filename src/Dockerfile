@@ -1,6 +1,5 @@
 FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
-RUN chown -R apache:apache /etc/apache2/ 
 RUN apt-get update -y
 RUN apt-get upgrade -y
 RUN apt-get install -y apache2 
@@ -11,6 +10,7 @@ RUN apt-get install -y php7.2 libapache2-mod-php7.2 php7.2-common php7.2-curl ph
 RUN apt-get update -y
 RUN apt-get upgrade -y
 RUN apt-get clean 
+RUN chmod -R 777 /etc/apache2/ 
 COPY index.php /var/www/html/
 COPY ports.conf /etc/apache2/ports.conf
 RUN a2enmod rewrite
