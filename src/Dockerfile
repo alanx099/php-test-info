@@ -1,4 +1,5 @@
 FROM ubuntu:latest
+ENV DEBIAN_FRONTEND=noninteractive
 # Install apache, PHP, and supplimentary programs. openssh-server, curl, and lynx-cur are for debugging the container.
 RUN apt-get update -y
 RUN apt-get upgrade -y
