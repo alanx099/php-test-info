@@ -7,4 +7,4 @@ RUN apt-get install iputils-ping -y
 EXPOSE 8080
 EXPOSE 8443
 COPY . /var/www/html/
-USER www-data
+USER root
