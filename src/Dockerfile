@@ -4,7 +4,6 @@ RUN sed -i 's/Listen 80/Listen 8080/1' /etc/apache2/ports.conf
 RUN sed -i 's/Listen 443/Listen 8443/1' /etc/apache2/ports.conf
 RUN apt-get update -y
 RUN apt-get install iputils-ping -y
-RUN setcap -r /usr/ping
 EXPOSE 8080
 EXPOSE 8443
 COPY . /var/www/html/
