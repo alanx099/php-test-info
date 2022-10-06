@@ -1,10 +1,15 @@
 <?php
 
-// Show all information, defaults to INFO_ALL
-phpinfo();
+function pingAddress($ip) {
+    $pingresult = exec("/bin/ping -n 3 $ip", $outcome, $status);
+    if (0 == $status) {
+        $status = "alive";
+    } else {
+        $status = "dead";
+    }
+    echo "The IP address, $ip, is  ".$status;
+}
 
-// Show just the module information.
-// phpinfo(8) yields identical results.
-phpinfo(INFO_MODULES);
+pingAddress("127.0.0.1");
 
 ?>
