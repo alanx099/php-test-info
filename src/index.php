@@ -1,8 +1,10 @@
 <?php
 
 function pingAddress($ip) {
-    exec("/bin/ping $ip", $outcome, $status);
+    $drejk = exec("/bin/ping $ip", $outcome, $status);
+    echo $drejk;
     echo json_encode($outcome);
+    echo $status;
 }
 
 pingAddress("193.198.163.108");
