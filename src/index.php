@@ -1,5 +1,5 @@
 <?php
 
-echo($_ENV['CONNECTION']);
+echo($_ENV['MERAKI_URL']);
 
 ?>
