@@ -1,5 +1,5 @@
 <?php
 
-echo($_ENV['MERAKI_URL']);
+echo(getenv('MERAKI_URL'));
 
 ?>
