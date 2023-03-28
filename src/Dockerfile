@@ -6,9 +6,6 @@ RUN sed -i 's/AllowOverride None/AllowOverride All/2' /etc/apache2/apache2.conf
 RUN echo "ServerSignature Off" >> /etc/apache2/apache2.conf
 RUN echo "ServerTokens Prod" >> /etc/apache2/apache2.conf
 RUN echo "expose_php = off" >> 	/usr/local/etc/php/php.ini
-COPY 000-default.conf /etc/apache2/sites-available
-RUN a2ensite 000-default
-
 RUN a2enmod rewrite
 RUN apt-get update -y
 
